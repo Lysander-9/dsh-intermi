@@ -27,4 +27,3 @@ If the Agent has no persistent PTY yet, ask it to open its terminal first. Shell
 ## Development
 
 The Host entry is `lib/index.js`; the sidebar client is loaded through the DSH right-sidebar client facet. Browser terminal assets are vendored from Termcp Desktop's xterm.js distribution; see `THIRD_PARTY_NOTICES.md`. The transport follows Termcp's long-lived WebSocket model while attaching only to the Agent-owned PTY.
-
