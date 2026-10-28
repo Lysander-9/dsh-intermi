@@ -1,0 +1,30 @@
+{
+  "$schema": "https://raw.githubusercontent.com/T-Auto/dsh-std/main/packages/manifest/schema/dsh-plugin-0.15.schema.json",
+  "manifestVersion": "0.15",
+  "id": "dsh-intermi",
+  "name": "dsh-intermi",
+  "version": "0.1.0",
+  "license": "UNLICENSED",
+  "facets": {
+    "host": {
+      "entry": "lib/index.js",
+      "apiVersion": "v1alpha1"
+    }
+  },
+  "permissions": [
+    {
+      "name": "dsh-intermi.logs.write",
+      "scope": "dsh-home",
+      "reason": "Persist Agent terminal command and output records."
+    }
+  ],
+  "contributes": {
+    "x-display": [
+      {
+        "title": "dsh-intermi",
+        "description": "View, audit, and interact with the persistent PTY used by a DSH Agent."
+      }
+    ]
+  }
+}
+

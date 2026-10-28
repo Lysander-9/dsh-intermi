@@ -1,0 +1,21 @@
+{
+  "plugin": "DSH dsh-intermi",
+  "shellsTitle": "持久 Shell",
+  "shellCount": "当前持久 Shell：{count}",
+  "agents": "Agent 会话",
+  "selectAgent": "选择一个 Agent 查看终端记录",
+  "noShell": "该 Agent 尚未创建终端会话。",
+  "commands": "终端操作记录",
+  "empty": "暂无终端操作记录。",
+  "loading": "正在读取 dsh-intermi 终端记录…",
+  "loadError": "读取审计记录失败：{message}",
+  "tool": "工具",
+  "input": "输入",
+  "output": "输出",
+  "status": "状态",
+  "running": "执行中",
+  "completed": "已结束",
+  "failed": "失败",
+  "open": "打开 Shell"
+}
+

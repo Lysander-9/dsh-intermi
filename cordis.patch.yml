@@ -1,0 +1,5 @@
+- id: optional-persistent-terminals
+  insert:
+    - id: dsh-intermi
+      name: dsh-intermi
+

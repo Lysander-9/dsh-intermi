@@ -1,0 +1,21 @@
+{
+  "plugin": "DSH dsh-intermi",
+  "shellsTitle": "Persistent Shells",
+  "shellCount": "Persistent Shells: {count}",
+  "agents": "Agent sessions",
+  "selectAgent": "Select an Agent to review terminal activity",
+  "noShell": "This Agent has not opened a terminal session.",
+  "commands": "Terminal activity",
+  "empty": "No terminal activity recorded.",
+  "loading": "Loading dsh-intermi terminal activity…",
+  "loadError": "Could not load audit records: {message}",
+  "tool": "Tool",
+  "input": "Input",
+  "output": "Output",
+  "status": "Status",
+  "running": "Running",
+  "completed": "Completed",
+  "failed": "Failed",
+  "open": "Open Shell"
+}
+
