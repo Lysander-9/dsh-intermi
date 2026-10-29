@@ -3,7 +3,7 @@
   "manifestVersion": "0.15",
   "id": "dsh-intermi",
   "name": "dsh-intermi",
-  "version": "0.1.11",
+  "version": "0.1.12",
   "license": "UNLICENSED",
   "facets": {
     "host": {
