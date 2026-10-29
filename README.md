@@ -1,29 +1,62 @@
-# dsh-intermi — Interactive Terminal
+# dsh-intermi
 
-[简体中文](README.zh-CN.md) | English
+**See and use the exact terminal your DSH Agent is using.** dsh-intermi puts the Agent's existing persistent shell in DSH NEXT's right sidebar, so you can follow its work and step in when needed.
 
-dsh-intermi gives a person and a DSH Agent a shared view of the Agent's existing persistent PTY. It does not create a second user-owned terminal.
+[简体中文](README.zh-CN.md) · English
 
-## What it does
+<!-- Maintainer: add a product screenshot here when one is available. -->
 
-- One persistent PTY per Agent conversation. The Agent opens it through DSH's native terminal tools; dsh-intermi attaches to that same DSH PTY. No duplicate shell is created.
-- A single compact session selector lists terminals across Agents using each DSH conversation's saved title. Selecting another entry switches the view to its existing PTY; it does not close the previous shell. The last selection is remembered in the browser.
-- A right-sidebar xterm.js screen attaches to the Agent's existing PTY over one duplex WebSocket, restores recent scrollback when reopened, streams raw PTY output, and sends keyboard input and resize events to that same session. The user can click the terminal and type into the live shell, including while the Agent is using it.
-- Recent output is buffered per live PTY and persisted locally (up to 512 KiB per terminal). If the buffer fills, oldest output is discarded first. After DSH exits and a PTY ends, its saved output remains available as a read-only terminal history.
-- Terminal colors offer high-contrast dark and light presets plus custom background and text colors. The choice is saved in the browser.
-- The delete button closes the selected Agent-owned PTY and its processes after confirmation; the Agent can open a new persistent shell later.
-- Historical command events remain available in `%USERPROFILE%\.dsh\itatmn\events.jsonl` for compatibility with earlier releases.
-- Standalone `ops_bash`, `bash`, and `pwsh` tools are denied so shell work stays on the Agent's one persistent PTY.
+## Why dsh-intermi?
 
-## Use
+Most terminal views show a separate shell. dsh-intermi attaches to the PTY already owned by the Agent: one session, one live stream, shared between you and the Agent.
 
-1. Open the **dsh-intermi** card in the right sidebar.
-2. Ask Agents to run terminal operations. dsh-intermi lists their existing PTYs together in the session selector, labeled with the Agent conversation title.
-3. Choose an Agent/Shell to attach the large terminal view to that PTY. Switching entries leaves other Shells running. The Agent can continue using the selected shell through `terminal_send` and `terminal_read`.
-4. Click the terminal to focus it. Press Ctrl+C to interrupt a foreground command without closing the shell.
+- **Watch live work** — follow terminal input and output as the Agent works.
+- **Switch between Agents** — choose a session by its DSH conversation title without closing other shells.
+- **Take over when needed** — focus the terminal and type into the same shell. Press `Ctrl+C` to interrupt the foreground command; the Agent can continue in that shell.
+- **Keep useful scrollback** — reopen the view or DSH and review saved output.
+- **Make it readable** — choose a light or dark theme, or set custom foreground and background colors.
 
-If the Agent has no persistent PTY yet, ask it to open its terminal first. Shell count reports live persistent PTYs, not ended terminal histories or independent commands. Closing or switching the sidebar view disconnects only the view; a Shell ends when the user deletes it or DSH closes it. DSH cannot resume a process after application exit, but dsh-intermi preserves up to 512 KiB of terminal output per Shell as read-only history. Reopening the plugin restores the last selection and reconnects live PTYs or displays their saved history.
+## Install
 
-## Development
+In DSH NEXT's Plugin Market, install **dsh-intermi** from GitHub:
 
-The Host entry is `lib/index.js`; the sidebar client is loaded through the DSH right-sidebar client facet. Browser terminal assets are vendored from Termcp Desktop's xterm.js distribution; see `THIRD_PARTY_NOTICES.md`. The transport follows Termcp's long-lived WebSocket model while attaching only to the Agent-owned PTY.
+[`Lysander-9/dsh-intermi`](https://github.com/Lysander-9/dsh-intermi)
+
+If the market asks for a repository URL, use:
+
+```text
+https://github.com/Lysander-9/dsh-intermi.git
+```
+
+Restart DSH NEXT if the market prompts you to do so, then open **dsh-intermi** in the right sidebar.
+
+## Get started
+
+1. Start or select an Agent conversation.
+2. Let the Agent run a terminal task. dsh-intermi directs its shell work to that Agent's persistent DSH terminal.
+3. Select the conversation from the terminal selector. The terminal displays that Agent's live PTY.
+4. Click inside the terminal to type. Use `Ctrl+C` to stop a foreground command without closing the shell.
+
+A terminal appears after the Agent opens its persistent shell. Switching the selector only changes which shell you are viewing; other shells keep running.
+
+## Shells and saved output
+
+- Each Agent conversation has its own persistent shell. dsh-intermi does not create a second, look-alike terminal.
+- Closing or switching the sidebar view disconnects the view; it does not close the shell.
+- Deleting a shell closes its PTY and the processes running in it.
+- Exiting DSH NEXT ends running PTY processes. dsh-intermi saves up to **512 KiB of recent output per shell** for later, read-only review. Older output is discarded first when the limit is reached; the process itself does not resume after restart.
+- Terminal history and command events are stored locally in DSH home, under `itatmn/` (`events.jsonl` contains command events).
+- To keep shell work attached to the audited PTY, standalone `pwsh`, `bash`, and `ops_bash` shell tools are blocked while dsh-intermi is active.
+
+## Requirements
+
+- DSH NEXT `>= 0.2.1-rc.2` and `< 0.3.0`
+- A DSH Agent with access to the native persistent terminal tools
+
+## Development and acknowledgements
+
+The Host entry is `lib/index.js`; the right-sidebar client is `lib/client.js`. The browser terminal uses vendored xterm.js assets. See [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) for attribution and license details.
+
+## License
+
+The package currently declares `UNLICENSED` in its manifest.
