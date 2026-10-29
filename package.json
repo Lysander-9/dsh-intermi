@@ -1,6 +1,9 @@
 {
   "name": "dsh-intermi",
-  "version": "0.1.8",
+  "version": "0.1.9",
+  "scripts": {
+    "test": "node --test"
+  },
   "private": true,
   "description": "Interactive xterm view attached to each Agent's own persistent PTY.",
   "type": "module",
