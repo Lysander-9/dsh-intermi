@@ -4,7 +4,15 @@
 
 简体中文 · [English](README.md)
 
-<!-- 维护者：有产品截图后可在此处补充。 -->
+## 界面预览
+
+在会话旁查看 Agent 正在使用的持久终端：
+
+![dsh-intermi 在 DSH 会话旁显示 Agent 的实时终端](docs/images/agent-terminal-in-use.png)
+
+终端选择器使用简洁名称。展开后可以切换 Shell，也可以点击对应条目右侧的红色叉号删除：
+
+![终端选择器显示简洁名称和逐项删除按钮](docs/images/terminal-selector-delete.png)
 
 ## 为什么使用 dsh-intermi？
 
@@ -43,7 +51,7 @@ Agent 打开持久 Shell 后，终端才会出现在选择器中。切换选择�
 
 - 每个 Agent 会话使用自己的持久 Shell。dsh-intermi 不会另建一个看起来相似的终端。
 - 关闭或切换右侧边栏只会断开界面连接，不会关闭 Shell。
-- 删除 Shell 会关闭对应 PTY 及其中运行的进程。
+- 删除 Shell 会关闭对应 PTY 及其中运行的进程，并移除该终端保存的输出；审计事件仍保存在本机。
 - 退出 DSH NEXT 会结束运行中的 PTY 进程。dsh-intermi 会为每个 Shell 在本机保存最多 **512 KiB 的近期输出**，供之后只读查看；达到上限后优先丢弃较早输出。重启后不会恢复原进程。
 - 终端历史和命令事件保存在本机 DSH home 的 `itatmn/` 目录中；`events.jsonl` 保存命令事件。
 - 为确保 Shell 操作都经过可审计的 PTY，dsh-intermi 启用时会拦截独立的 `pwsh`、`bash` 和 `ops_bash` Shell 工具。

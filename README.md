@@ -4,7 +4,15 @@
 
 [简体中文](README.zh-CN.md) · English
 
-<!-- Maintainer: add a product screenshot here when one is available. -->
+## Screenshots
+
+View an Agent's live persistent terminal beside its conversation:
+
+![dsh-intermi showing an Agent's live terminal beside the DSH conversation](docs/images/agent-terminal-in-use.png)
+
+The terminal selector uses concise names. Open it to switch shells or delete one from its row:
+
+![Terminal selector with concise shell names and per-terminal delete buttons](docs/images/terminal-selector-delete.png)
 
 ## Why dsh-intermi?
 
@@ -43,7 +51,7 @@ A terminal appears after the Agent opens its persistent shell. Switching the sel
 
 - Each Agent conversation has its own persistent shell. dsh-intermi does not create a second, look-alike terminal.
 - Closing or switching the sidebar view disconnects the view; it does not close the shell.
-- Deleting a shell closes its PTY and the processes running in it.
+- Deleting a shell closes its PTY and running processes, and removes that shell's saved terminal output. Audit events remain stored locally.
 - Exiting DSH NEXT ends running PTY processes. dsh-intermi saves up to **512 KiB of recent output per shell** for later, read-only review. Older output is discarded first when the limit is reached; the process itself does not resume after restart.
 - Terminal history and command events are stored locally in DSH home, under `itatmn/` (`events.jsonl` contains command events).
 - To keep shell work attached to the audited PTY, standalone `pwsh`, `bash`, and `ops_bash` shell tools are blocked while dsh-intermi is active.
