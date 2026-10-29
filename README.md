@@ -21,7 +21,7 @@ Most terminal views show a separate shell. dsh-intermi attaches to the PTY alrea
 - **Watch live work** — follow terminal input and output as the Agent works.
 - **Switch between Agents** — choose a session by its DSH conversation title without closing other shells.
 - **Take over when needed** — focus the terminal and type into the same shell. Press `Ctrl+C` to interrupt the foreground command; the Agent can continue in that shell.
-- **Keep the full scrollback** — reopen the view or DSH and review the complete output recorded from the PTY.
+- **Keep the full output** — PTY output is saved locally without a rolling disk limit. The visible scrollback has a memory-conscious default of 50,000 lines, adjustable from 5,000 to 100,000 in Terminal display settings.
 - **Make it readable** — choose a light or dark theme, or set custom foreground and background colors.
 
 ## Install
@@ -52,7 +52,7 @@ A terminal appears after the Agent opens its persistent shell. Switching the sel
 - Each Agent conversation has its own persistent shell. dsh-intermi does not create a second, look-alike terminal.
 - Closing or switching the sidebar view disconnects the view; it does not close the shell.
 - Deleting a shell closes its PTY and running processes, and removes that shell's saved terminal output. Audit events remain stored locally.
-- dsh-intermi appends observed PTY output to a local per-shell log and replays it when you reopen the view. Logs have no rolling size cap and use local disk space until the shell is deleted. Exiting DSH NEXT ends running PTY processes; the saved output remains available for read-only review, but the process itself does not resume after restart.
+- dsh-intermi appends observed PTY output to a local per-shell log and replays it when you reopen the view. Logs have no rolling disk cap and use local disk space until the shell is deleted. The in-memory scrollback defaults to 50,000 lines; change it from **Terminal display** settings (5,000–100,000 lines). Exiting DSH NEXT ends running PTY processes; the saved output remains available for read-only review, but the process itself does not resume after restart.
 - Terminal history and command events are stored locally in DSH home, under `itatmn/` (`events.jsonl` contains command events).
 - To keep shell work attached to the audited PTY, standalone `pwsh`, `bash`, and `ops_bash` shell tools are blocked while dsh-intermi is active.
 
