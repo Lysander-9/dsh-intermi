@@ -63,3 +63,19 @@ test("bounds recovered output and marks it truncated", () => {
   assert.equal(recovered.text.endsWith(`new 1000 ${"x".repeat(48)}`), true);
   assert.equal(recovered.truncated, true);
 });
+
+test("omits ambiguous rewrites when line count does not prove a current-command delta", () => {
+  const read = terminalRead(["rewritten one", "rewritten two", "rewritten three"], true);
+  assert.deepEqual(recoverTerminalOutput(3, "old one\nold two\nold three", read), {
+    text: "",
+    truncated: true
+  });
+});
+
+test("omits ambiguous non-truncated multi-line rewrites", () => {
+  const read = terminalRead(["new one", "new two", "new three"]);
+  assert.deepEqual(recoverTerminalOutput(3, "old one\nold two\nold three", read), {
+    text: "",
+    truncated: false
+  });
+});

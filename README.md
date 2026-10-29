@@ -22,7 +22,7 @@ Most terminal views show a separate shell. dsh-intermi attaches to the PTY alrea
 - **Switch between Agents** — choose a session by its DSH conversation title without closing other shells.
 - **Take over when needed** — focus the terminal and type into the same shell. Press `Ctrl+C` to interrupt the foreground command; the Agent can continue in that shell.
 - **Keep the full output** — PTY output is saved locally without a rolling disk limit. The visible scrollback has a memory-conscious default of 50,000 lines, adjustable from 5,000 to 100,000 in Terminal display settings.
-- **Avoid blind command repeats** — when DSH's send result has no output, dsh-intermi recovers the recent PTY output or reports that the command state is uncertain; it never resends the command.
+- **Keep Agent results scoped to the command** — the Agent receives only the result of its current `terminal_send`; full terminal history stays in the ITMN view for the user. If DSH returns no output, dsh-intermi recovers only a provable current-command delta or reports uncertainty. It never gives retained history to the Agent or resends the command.
 - **Make it readable** — choose a light or dark theme, or set custom foreground and background colors.
 
 ## Install
