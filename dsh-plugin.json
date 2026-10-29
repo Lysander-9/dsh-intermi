@@ -21,10 +21,10 @@
   "contributes": {
     "x-display": [
       {
+        "icon": "./assets/terminal-icon.svg",
         "title": "dsh-intermi",
         "description": "View, audit, and interact with the persistent PTY used by a DSH Agent."
       }
     ]
   }
 }
-
